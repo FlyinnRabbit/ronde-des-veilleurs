@@ -1,0 +1,31 @@
+; La Ronde des Veilleurs — roguelite coopératif isométrique (Godot 4.3)
+
+config_version=5
+
+[application]
+
+config/name="La Ronde des Veilleurs"
+config/description="Roguelite coopératif en vue isométrique, dans l'univers de Lanterne des Profondeurs"
+config/version="0.1.0"
+run/main_scene="res://main.tscn"
+config/features=PackedStringArray("4.3")
+config/icon="res://art/icon.png"
+boot_splash/bg_color=Color(0.03, 0.035, 0.07, 1)
+
+[autoload]
+
+Audio="*res://scripts/audio.gd"
+
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=720
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
+
+[rendering]
+
+textures/vram_compression/import_etc2_astc=true
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
+environment/defaults/default_clear_color=Color(0.02, 0.025, 0.05, 1)

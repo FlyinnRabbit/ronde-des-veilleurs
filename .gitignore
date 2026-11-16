@@ -1,0 +1,7 @@
+# Godot
+.godot/
+*.translation
+# Exports
+build/
+*.exe
+*.pck
