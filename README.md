@@ -29,6 +29,8 @@ Onglet **Releases** : Windows, Linux / Steam Deck, macOS. Les exécutables ne so
 (Windows : *Informations complémentaires → Exécuter quand même* ; macOS : *clic droit → Ouvrir*).
 **Tous les joueurs doivent avoir la même version.**
 
+**Version portable** (`…_Portable.zip`) : tant que `portable.txt` est à côté de l'exécutable, les réglages sont enregistrés dans le dossier `sauvegardes` à côté du jeu — pratique sur une clé USB.
+
 ## Jouer à plusieurs
 
 ### En ligne

@@ -1,0 +1,7 @@
+LA RONDE DES VEILLEURS - VERSION PORTABLE
+
+Ce fichier active le mode portable : tant qu'il reste à côté du jeu, les réglages
+(dernière adresse utilisée pour rejoindre une partie, etc.) sont enregistrés dans le
+dossier « sauvegardes » ici même. Copiez ce dossier sur une clé USB pour l'emporter.
+
+Supprimez ce fichier pour revenir à l'emplacement habituel des réglages.

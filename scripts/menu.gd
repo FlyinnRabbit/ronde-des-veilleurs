@@ -9,7 +9,7 @@ var ip_edit: LineEdit
 var lobby_list: Label
 var lobby_info: Label
 var start_btn: Button
-const CFG := "user://ronde.cfg"
+const Paths = preload("res://scripts/paths.gd")
 
 func _ready() -> void:
 	layer = 10
@@ -102,7 +102,7 @@ func _build_main() -> void:
 	_button(v, "Rejoindre une partie en ligne", func(): show_screen("join"))
 	_button(v, "Quitter", func(): get_tree().quit())
 	status_label = _label(v, "", 14, Color(1.0, 0.7, 0.5))
-	_label(v, "Version %s" % ProjectSettings.get_setting("application/config/version", "?"), 12, Color(0.5, 0.56, 0.68))
+	_label(v, "Version %s%s" % [ProjectSettings.get_setting("application/config/version", "?"), " — mode portable" if Paths.is_portable() else ""], 12, Color(0.5, 0.56, 0.68))
 
 func _build_join() -> void:
 	var v := _panel(Control.PRESET_CENTER)
@@ -113,7 +113,7 @@ func _build_join() -> void:
 	ip_edit.placeholder_text = "192.168.1.20"
 	ip_edit.custom_minimum_size = Vector2(300, 40)
 	var cfg := ConfigFile.new()
-	if cfg.load(CFG) == OK:
+	if cfg.load(Paths.file("ronde.cfg")) == OK:
 		ip_edit.text = String(cfg.get_value("net", "last_ip", ""))
 	ip_edit.text_submitted.connect(func(_t): _join())
 	v.add_child(ip_edit)
@@ -126,7 +126,7 @@ func _join() -> void:
 		return
 	var cfg := ConfigFile.new()
 	cfg.set_value("net", "last_ip", ip)
-	cfg.save(CFG)
+	cfg.save(Paths.file("ronde.cfg"))
 	game.join_game(ip)
 	show_screen("main")
 

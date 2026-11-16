@@ -69,6 +69,13 @@ jobs:
           "$RUNNER_TEMP/godot" --headless --export-release "Linux" build/linux/RondeDesVeilleurs.x86_64
           cp art/icon.png build/linux/RondeDesVeilleurs.png
           tar -czf build/RondeDesVeilleurs_Linux_SteamDeck.tar.gz -C build/linux .
+          # Versions portables : portable.txt à côté du jeu = réglages enregistrés dans le dossier du jeu
+          P=build/portable
+          mkdir -p $P/win/RondeDesVeilleurs_Portable/sauvegardes $P/linux/RondeDesVeilleurs_Portable/sauvegardes
+          cp build/RondeDesVeilleurs.exe art/portable.txt $P/win/RondeDesVeilleurs_Portable/
+          cp build/linux/RondeDesVeilleurs.x86_64 build/linux/RondeDesVeilleurs.png art/portable.txt $P/linux/RondeDesVeilleurs_Portable/
+          (cd $P/win && zip -9 -r ../../RondeDesVeilleurs_Windows_Portable.zip RondeDesVeilleurs_Portable)
+          tar -czf build/RondeDesVeilleurs_Linux_Portable.tar.gz -C $P/linux RondeDesVeilleurs_Portable
           # macOS : application universelle (Intel + Apple Silicon), signature ad hoc (non validée par Apple)
           mkdir -p build/macos
           "$RUNNER_TEMP/godot" --headless --export-release "macOS" build/macos/RondeDesVeilleurs.zip
@@ -82,6 +89,8 @@ jobs:
           path: |
             build/RondeDesVeilleurs_Windows.zip
             build/RondeDesVeilleurs_Linux_SteamDeck.tar.gz
+            build/RondeDesVeilleurs_Windows_Portable.zip
+            build/RondeDesVeilleurs_Linux_Portable.tar.gz
             build/RondeDesVeilleurs_macOS.zip
 
       - name: Release (tag ou Release publiée)
@@ -91,6 +100,8 @@ jobs:
           files: |
             build/RondeDesVeilleurs_Windows.zip
             build/RondeDesVeilleurs_Linux_SteamDeck.tar.gz
+            build/RondeDesVeilleurs_Windows_Portable.zip
+            build/RondeDesVeilleurs_Linux_Portable.tar.gz
             build/RondeDesVeilleurs_macOS.zip
 
       - name: Release (lancement manuel avec version)
@@ -107,6 +118,8 @@ jobs:
             **Windows** : télécharger `RondeDesVeilleurs_Windows.zip`, décompresser et lancer `RondeDesVeilleurs.exe`.
             L'exe n'est pas encore signé : si Windows affiche « Windows a protégé votre ordinateur », cliquer *Informations complémentaires* → *Exécuter quand même*.
 
+            **Version portable** (clé USB, réglages à côté du jeu) : `RondeDesVeilleurs_Windows_Portable.zip` ou `RondeDesVeilleurs_Linux_Portable.tar.gz`.
+
             **Linux / Steam Deck** : télécharger `RondeDesVeilleurs_Linux_SteamDeck.tar.gz`, extraire, lancer `RondeDesVeilleurs.x86_64` (voir le README pour l'ajouter à Steam).
 
             **macOS** (Intel et Apple Silicon) : télécharger `RondeDesVeilleurs_macOS.zip`, décompresser, glisser *La Ronde des Veilleurs* dans Applications.
@@ -116,4 +129,6 @@ jobs:
           files: |
             build/RondeDesVeilleurs_Windows.zip
             build/RondeDesVeilleurs_Linux_SteamDeck.tar.gz
+            build/RondeDesVeilleurs_Windows_Portable.zip
+            build/RondeDesVeilleurs_Linux_Portable.tar.gz
             build/RondeDesVeilleurs_macOS.zip
